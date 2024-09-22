@@ -15,8 +15,7 @@ export default class GoogleMapsPage {
       await rejectButton.click();
     } catch (e) {
       console.log(
-        "Reject all cookies button not found or didn't appear in time:",
-        e
+        "Reject all cookies button not found or didn't appear in time:"
       );
     }
   }
