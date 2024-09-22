@@ -4,7 +4,21 @@ export default class GoogleMapsPage {
   }
 
   async rejectAllCookies() {
-    await this.page.click('button[aria-label="Reject all"]');
+    const rejectButton = this.page
+      .locator(
+        "form div.VfPpkd-dgl2Hf-ppHlrf-sM5MNb button[aria-label]:has(span)"
+      )
+      .first();
+
+    try {
+      await rejectButton.waitFor({ timeout: 5000 });
+      await rejectButton.click();
+    } catch (e) {
+      console.log(
+        "Reject all cookies button not found or didn't appear in time:",
+        e
+      );
+    }
   }
 
   async searchCity(searchValue) {
