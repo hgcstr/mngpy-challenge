@@ -43,15 +43,19 @@ async function setupGoogleMaps(page, city) {
 }
 
 test.describe("Happy tests", () => {
-  test("AC01", async ({ page }) => {
+  test("AC 1: Verify city headline displays correctly after search", async ({
+    page,
+  }) => {
     const googleMapsPage = await setupGoogleMaps(page, testCities.paris.name);
-    const headlineText = await googleMapsPage.getHealineText();
+    const headlineText = await googleMapsPage.getHeadlineText();
     expect(headlineText).toBe(testCities.paris.name);
   });
 
-  test("AC02", async ({ page }) => {
+  test("AC 2: Verify destination field content after selecting directions", async ({
+    page,
+  }) => {
     const googleMapsPage = await setupGoogleMaps(page, testCities.london.name);
-    const headlineText = await googleMapsPage.getHealineText();
+    const headlineText = await googleMapsPage.getHeadlineText();
     expect(headlineText).toBe(testCities.london.name);
 
     await googleMapsPage.clickDirectionsButton();
@@ -59,9 +63,9 @@ test.describe("Happy tests", () => {
     expect(destinationText).toContain(testCities.london.name);
   });
 
-  test("AC03", async ({ page }) => {
+  test("AC 3: Verify city headline remains after zoom", async ({ page }) => {
     const googleMapsPage = await setupGoogleMaps(page, testCities.newYork.name);
-    const headlineText = await googleMapsPage.getHealineText();
+    const headlineText = await googleMapsPage.getHeadlineText();
     expect(headlineText).toBe(testCities.newYork.name);
 
     await page.waitForTimeout(2000);
@@ -77,9 +81,9 @@ test.describe("Happy tests", () => {
     expect(newZoomLevel).toBeGreaterThan(initialZoomLevel);
   });
 
-  test("AC04", async ({ page }) => {
+  test("AC 4: Verify nearby suggestions", async ({ page }) => {
     const googleMapsPage = await setupGoogleMaps(page, testCities.berlin.name);
-    const headlineText = await googleMapsPage.getHealineText();
+    const headlineText = await googleMapsPage.getHeadlineText();
     expect(headlineText).toBe(testCities.berlin.name);
 
     await googleMapsPage.clickNearbyButton();
@@ -89,7 +93,7 @@ test.describe("Happy tests", () => {
 });
 
 test.describe("Unhappy tests", () => {
-  test("AC05", async ({ page }) => {
+  test("AC 5: Verify Unsuccessful Search", async ({ page }) => {
     const googleMapsPage = await setupGoogleMaps(page, testCities.invalid.name);
     const canNotFindText = await googleMapsPage.getCantFindLabelText();
     expect(canNotFindText).toBe(
@@ -99,9 +103,9 @@ test.describe("Unhappy tests", () => {
 });
 
 test.describe("Boundary tests", () => {
-  test("AC06", async ({ page }) => {
+  test("AC 6: Verify Zoom Limits", async ({ page }) => {
     const googleMapsPage = await setupGoogleMaps(page, testCities.lima.name);
-    const headlineText = await googleMapsPage.getHealineText();
+    const headlineText = await googleMapsPage.getHeadlineText();
     expect(headlineText).toBe(testCities.lima.name);
 
     await page.waitForTimeout(3000);

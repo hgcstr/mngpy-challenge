@@ -33,7 +33,7 @@ export default class GoogleMapsPage {
     await this.page.click("#searchbox-searchbutton");
   }
 
-  async getHealineText() {
+  async getHeadlineText() {
     return await this.page.locator(".DUwDvf.lfPIob").innerText();
   }
 
