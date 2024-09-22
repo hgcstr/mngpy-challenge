@@ -137,3 +137,15 @@ test.describe("Boundary tests", () => {
     expect(isZoomOutDisabled).toBe(true);
   });
 });
+
+test.describe("Non functional tests", () => {
+  test("Verify page load time is less than 2 seconds", async ({ page }) => {
+    const startTime = Date.now();
+    await page.goto(gMapsEnglishUrl);
+    await page.waitForLoadState("load");
+    const loadTime = Date.now() - startTime;
+
+    console.log(`Current page load time: ${loadTime} ms`);
+    expect(loadTime).toBeLessThan(2000);
+  });
+});
