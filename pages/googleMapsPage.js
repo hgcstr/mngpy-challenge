@@ -47,9 +47,6 @@ export default class GoogleMapsPage {
 
   async getDestinationText() {
     return await this.page.locator("#sb_ifc51 input").inputValue();
-    // return await this.page
-    //   .locator("#sb_ifc51 input")
-    //   .getAttribute("aria-label");
   }
 
   async clickZoomIn() {
@@ -63,14 +60,15 @@ export default class GoogleMapsPage {
   async getNearbySuggestions() {
     await this.page.waitForSelector("#ydp1wd-haAclf");
 
-    return await this.page.$$eval(
-      "#ydp1wd-haAclf .DgCNMb span.cGyruf.fontBodyMedium.RYaupb",
-      (elements) => {
-        return elements
-          .map((element) => element.innerText.trim())
-          .filter((text) => text.length > 0);
-      }
+    const suggestionLocator = this.page.locator(
+      "#ydp1wd-haAclf .DgCNMb span.cGyruf.fontBodyMedium.RYaupb"
     );
+    const suggestions = await suggestionLocator.evaluateAll((elements) =>
+      elements
+        .map((element) => element.innerText.trim())
+        .filter((text) => text.length > 0)
+    );
+    return suggestions;
   }
 
   async getCantFindLabelText() {
