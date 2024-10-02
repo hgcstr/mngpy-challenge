@@ -1,4 +1,4 @@
-# Mangopay Challenge
+# GoogleMaps Challenge
 
 I used Playwright with JavaScript for this challenge due to its built in reporter, making it easier to manage test results. 
 Although I know how to use Cucumber, I opted not to use it to save time and focus on the main challenge since it wasn't explicitly mentioned.
